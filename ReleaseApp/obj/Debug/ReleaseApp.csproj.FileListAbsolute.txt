@@ -1,0 +1,56 @@
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe.config
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.pdb
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.g.cs
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\App.g.cs
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.lref
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.baml
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.g.resources
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.Properties.Resources.resources
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.exe
+c:\users\misiek\documents\visual studio 2015\Projects\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.pdb
+D:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe.config
+D:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe
+D:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.pdb
+D:\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.g.cs
+D:\ReleaseApp\ReleaseApp\obj\Debug\App.g.cs
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.lref
+D:\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.baml
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.g.resources
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.Properties.Resources.resources
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.exe
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.pdb
+D:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe.config
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.exe
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.pdb
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.pdb
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.g.cs
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\App.g.cs
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.lref
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.baml
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.g.resources
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.Properties.Resources.resources
+C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
+C:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe.config
+C:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe
+C:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.pdb
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.g.cs
+C:\ReleaseApp\ReleaseApp\obj\Debug\App.g.cs
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.lref
+C:\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.baml
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.g.resources
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.Properties.Resources.resources
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.CoreCompileInputs.cache
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.exe
+C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.pdb
