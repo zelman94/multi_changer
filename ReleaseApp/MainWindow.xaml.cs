@@ -20,35 +20,26 @@ namespace ReleaseApp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+  
     public partial class MainWindow : Window
     {
         List<CheckBox> checkBoxList;
         SortedDictionary<string, string> market;
         Dictionary<string, string> BrandtoSoft;
         List<string> marketIndex;
-        List<string> name_image;
+        public int counter2 = 0;
+
         public MainWindow()
         {
-            name_image = new List<string>()
-            {
-                {"oticon2.png"},
-                {"bernafon2.png"},
-                {"sonic2.png"}
-            };
-
             InitializeComponent();
-            string path = Directory.GetCurrentDirectory();
-            MessageBox.Show(path);
-
-
-
-
             updateLabels();
             verifyInstalledBrands();
             initializeElements();
             bindMarketDictionary();
             btnDelete.IsEnabled = false;
             btnUpdate.IsEnabled = false;
+         
         }
         
         void bindMarketDictionary()
@@ -422,16 +413,16 @@ namespace ReleaseApp
         {
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe"))
+                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"))
                 {
-                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe"));
+                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"));
                 }
             }
-            if ((bool)Sonic.IsChecked)
+            if ((bool)Oticon.IsChecked)
             {
-                if (File.Exists("C:/Program Files (x86)/Sonic/ExpressFit/FirmwareUpdater/FirmwareUpdater.exe"))
+                if (File.Exists("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe"))
                 {
-                    Process.Start("C:/Program Files (x86)/Sonic/ExpressFit/FirmwareUpdater/FirmwareUpdater.exe");
+                    Process.Start("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe");
                 }
             }
 
@@ -462,31 +453,43 @@ namespace ReleaseApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+
+            if (checkBoxes())
+            {
+                foreach (CheckBox checkbox in checkBoxList)
+                {
+                    int tmp = counter2 % 2;
+                    if (tmp == 0) {
+                        if (checkbox.IsEnabled == true)
+                        {
+                            checkbox.IsChecked = true;
+                        }
+
+                    }
+                    else
+                    {
+                        if (checkbox.IsEnabled == true)
+                        {
+                            checkbox.IsChecked = false;
+                        }
+                    }
+                  
+                }
+            }
+            else
+            {
+                foreach (CheckBox checkbox in checkBoxList)
+                {
+                    if (checkbox.IsEnabled == true)
+                    {
+                        checkbox.IsChecked = true;
+                    }
+                }
+            }
 
 
-            //if (checkBoxes())
-            //{
-            //    foreach (CheckBox checkbox in checkBoxList)
-            //    {
-            //        if (checkbox.IsEnabled == true)
-            //        {
-            //            checkbox.IsChecked = true;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    foreach (CheckBox checkbox in checkBoxList)
-            //    {
-            //        if (checkbox.IsEnabled == true)
-            //        {
-            //            checkbox.IsChecked = true;
-            //        }
-            //    }
-            //}
-
-
-
+            counter2++;
         }
     }
 

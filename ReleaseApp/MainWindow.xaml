@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReleaseApp"
         mc:Ignorable="d"
-        Title="Ultimate Changer" Height="426.3" Width="678.097" ResizeMode="NoResize">
+        Title="Ultimate Changer" Height="421.4" Width="678.194" ResizeMode="NoResize">
     <!--<Window.Icon>
         <BitmapImage UriSource="file:///C:/Users/Misiek/Documents/visual studio 2015/Projects/ReleaseApp/ReleaseApp/icon.jpg"/>
     </Window.Icon>-->
@@ -25,144 +25,144 @@
 
         <!-- #############################################################   BRAND SECTION    ###################################################### -->
         <Grid x:Name="BrandSection" Margin="10,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="3*"/>
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="LightBlue" BorderThickness="0,0,0,1"/>
-            <Border Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="LightBlue" BorderThickness="0,0,0,1"/>
+                <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="LightBlue" BorderThickness="0,0,0,1"/>
+                <Border Grid.Row="2" Grid.ColumnSpan="3" BorderBrush="LightBlue" BorderThickness="0,0,0,1"/>
 
-            <Label x:Name="lblBrand" Grid.Column="0" Grid.Row="0" Content="Brand" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label x:Name="lblMarket" Grid.Column="2" Grid.Row="0" Content="Market" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label x:Name="lblBrand" Grid.Column="0" Grid.Row="0" Content="Brand" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label x:Name="lblMarket" Grid.Column="2" Grid.Row="0" Content="Market" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <!--CHECKBOXES-->
-            <CheckBox x:Name="Oticon"   Grid.Column="1" Grid.Row="1" Content="" HorizontalAlignment="Center"  VerticalAlignment="Center" Checked="Brand_Checked" Unchecked="Brand_Unchecked"/>
-            <CheckBox x:Name="Bernafon" Grid.Column="1" Grid.Row="2" Content="" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="17" Checked="Brand_Checked" Unchecked="Brand_Unchecked"/>
-            <CheckBox x:Name="Sonic"    Grid.Column="1" Grid.Row="3" Content="" HorizontalAlignment="Center"  VerticalAlignment="Center" Checked="Brand_Checked" Unchecked="Brand_Unchecked" />
+                <!--CHECKBOXES-->
+                <CheckBox x:Name="Oticon"   Grid.Column="1" Grid.Row="1" Content="" HorizontalAlignment="Center"  VerticalAlignment="Center" Checked="Brand_Checked" Unchecked="Brand_Unchecked"/>
+                <CheckBox x:Name="Bernafon" Grid.Column="1" Grid.Row="2" Content="" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="17" Checked="Brand_Checked" Unchecked="Brand_Unchecked"/>
+                <CheckBox x:Name="Sonic"    Grid.Column="1" Grid.Row="3" Content="" HorizontalAlignment="Center"  VerticalAlignment="Center" Checked="Brand_Checked" Unchecked="Brand_Unchecked" />
 
-            <!--ZAINSTALOWANY MARKET-->
-            <Label x:Name="lblG" Content="" FontSize="13" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
-            <Label x:Name="lblO" Content="" FontSize="13" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" />
-            <Label x:Name="lblE" Content="" FontSize="13" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center"/>
+                <!--ZAINSTALOWANY MARKET-->
+                <Label x:Name="lblG" Content="" FontSize="13" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
+                <Label x:Name="lblO" Content="" FontSize="13" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" />
+                <Label x:Name="lblE" Content="" FontSize="13" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center"/>
 
-            <!--TLO NA LOGO-->
-            <Rectangle
+                <!--TLO NA LOGO-->
+                <Rectangle
                 x:Name="oticonRectangle" 
                 Grid.Column="0"
                 Grid.Row="1"
                 Height="50"
                 Width="130"
                 Fill="DarkViolet" RadiusY="27.4" RadiusX="27.4" RenderTransformOrigin="0.465,0.738">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.226"/>
-                        <TranslateTransform X="-0.06" Y="0.022"/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="Rectangle.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation x:Name="oticonStory"
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.226"/>
+                            <TranslateTransform X="-0.06" Y="0.022"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="Rectangle.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation x:Name="oticonStory"
                                     Storyboard.TargetName="oticonRectangle" 
                                     Storyboard.TargetProperty="Opacity"
                                     From="1.0" To="0.3" Duration="0:0:1" 
                                     AutoReverse="True" RepeatBehavior="Forever" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Rectangle.Triggers>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
 
-            </Rectangle>
+                </Rectangle>
 
-            <Rectangle
+                <Rectangle
                 x:Name="bernafonRectangle" 
                 Grid.Column="0"
                 Grid.Row="2"
                 Height="50"
                 Width="130"
                 Fill="Red"  RadiusY="27.4" RadiusX="27.4">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.226"/>
-                        <TranslateTransform X="0.021" Y="0.029"/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.226"/>
+                            <TranslateTransform X="0.021" Y="0.029"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
                                     Storyboard.TargetName="bernafonRectangle" 
                                     Storyboard.TargetProperty="Opacity"
                                     From="1.0" To="0.3" Duration="0:0:5" 
                                     AutoReverse="True" RepeatBehavior="Forever" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Rectangle.Triggers>
-            </Rectangle>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
+                </Rectangle>
 
-            <Rectangle
+                <Rectangle
                 x:Name="sonicnRectangle" 
                 Height="50"
                 Width="130"
                 Grid.Column="0"
                 Grid.Row="3"
                 Fill="Blue"   RadiusY="27.4" RadiusX="27.4" RenderTransformOrigin="0.465,0.738">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.226"/>
-                        <TranslateTransform X="-0.06" Y="0.022"/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="Rectangle.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.226"/>
+                            <TranslateTransform X="-0.06" Y="0.022"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="Rectangle.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
                                     Storyboard.TargetName="sonicnRectangle" 
                                     Storyboard.TargetProperty="Opacity"
                                     From="1.0" To="0.3" Duration="0:0:5" 
                                     AutoReverse="True" RepeatBehavior="Forever" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Rectangle.Triggers>
-            </Rectangle>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
+                </Rectangle>
 
-            <!--LOGO-->
-            <Image x:Name="imgOticon" Grid.Column="0" Grid.Row="1" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100">
-                <Image.Source>D:\ReleaseApp\ReleaseApp/oticon2.png</Image.Source>
-            </Image>
-            <Image x:Name="imgBernafon" Grid.Column="0" Grid.Row="2" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,0.966">
-                <Image.Source>D:\ReleaseApp\ReleaseApp/bernafon2.png</Image.Source>
-            </Image>
-            <Image x:Name="imgSonic" Grid.Column="0" Grid.Row="3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,1.349">
-                <Image.Source>D:\ReleaseApp\ReleaseApp/sonic2.png</Image.Source>
-            </Image>
+                <!--LOGO-->
+                <Image x:Name="imgOticon" Grid.Column="0" Grid.Row="1" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100">
+                    <Image.Source>C:/ReleaseApp/ReleaseApp/oticon2.png</Image.Source>
+                </Image>
+                <Image x:Name="imgBernafon" Grid.Column="0" Grid.Row="2" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,0.966">
+                    <Image.Source>C:/ReleaseApp/ReleaseApp/bernafon2.png</Image.Source>
+                </Image>
+                <Image x:Name="imgSonic" Grid.Column="0" Grid.Row="3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,1.349">
+                    <Image.Source>C:/ReleaseApp/ReleaseApp/sonic2.png</Image.Source>
+                </Image>
 
 
-            <Button Grid.Column="1" Grid.Row="4" Margin="5" Content="All" Click="Button_Click"/>
+                <Button Grid.Column="1" Grid.Row="4" Margin="5" Content="All" Click="Button_Click"/>
 
         </Grid>
-
+    
         <Label x:Name="lblSelectMarket" Grid.Row="0" Content="Select market:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <ComboBox x:Name="cmbMarket" Grid.Column="1" MaxDropDownHeight="150" SelectedIndex="0" Grid.Row="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="142">
 
