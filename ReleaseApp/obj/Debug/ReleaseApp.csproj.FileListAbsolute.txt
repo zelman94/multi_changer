@@ -42,7 +42,6 @@ C:\Users\Misiek\Desktop\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.Genera
 C:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe.config
 C:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.exe
 C:\ReleaseApp\ReleaseApp\bin\Debug\ReleaseApp.pdb
-C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
 C:\ReleaseApp\ReleaseApp\obj\Debug\MainWindow.g.cs
 C:\ReleaseApp\ReleaseApp\obj\Debug\App.g.cs
 C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache

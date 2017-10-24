@@ -39,7 +39,10 @@ namespace ReleaseApp
             bindMarketDictionary();
             btnDelete.IsEnabled = false;
             btnUpdate.IsEnabled = false;
-         
+            btnHattori.IsEnabled = false;
+            btnuninstal.IsEnabled = false;
+            btnFS.IsEnabled = false;
+
         }
         
         void bindMarketDictionary()
@@ -276,7 +279,23 @@ namespace ReleaseApp
 
             }
         }
+        bool verifyInstanceOfExec(string name)
+        {
+            foreach (CheckBox checkbox in checkBoxList)
+            {
+                if (checkbox.Name == name)
+                {
+                    
+                    if ( File.Exists($"C:/Program Files (x86)/{name}/{BrandtoSoft[checkbox.Name]}/{BrandtoSoft[checkbox.Name]}2/{BrandtoSoft[checkbox.Name]}.exe"))
+                    {
+                        return true;
+                    }
+                    else return false;
+                }
+            }
+            return false;
 
+        }
         void verifyInstalledBrands()
         {
             if (!Directory.Exists("C:/ProgramData/Oticon"))
@@ -304,6 +323,7 @@ namespace ReleaseApp
 
         void deleteTrash(string DirectoryName)
         {
+
             string tempName;
             System.IO.DirectoryInfo di = new DirectoryInfo(DirectoryName);
             try
@@ -333,24 +353,29 @@ namespace ReleaseApp
         bool checkRunningProcess(string name)
         {
             Process[] proc = Process.GetProcessesByName(name);
-            if (proc.Length == 0)
+            Process[] localAll = Process.GetProcesses();
+
+            foreach (Process item in localAll)
             {
-                return false;
+                string tmop = item.ProcessName;
+                if (tmop == name)
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
             
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             bool message = false;
+            string[] marki = { "Genie","Oasis","EXPRESSfit" };
+            int count3 = 0;
             foreach (CheckBox checkbox in checkBoxList)
             {
                 if ((bool)checkbox.IsChecked)
                 {
-                    if (!checkRunningProcess(BrandtoSoft[checkbox.Name]))
+                    if (checkRunningProcess(marki[count3]))
                     {
                         changeMarket($"C:/ProgramData/{checkbox.Name}/Common/ManufacturerInfo.XML");
                     }
@@ -359,6 +384,7 @@ namespace ReleaseApp
                         message = true;
                     }
                 }
+                count3++;
             }
             if (message)
             {
@@ -369,29 +395,43 @@ namespace ReleaseApp
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)Oticon.IsChecked)
+            bool fined = false;
+            if ((bool)Oticon.IsChecked && checkRunningProcess("Genie") && !verifyInstanceOfExec("Oticon"))
             {
                 deleteTrash("C:/ProgramData/Oticon");
+                deleteTrash("C:/Program Files (x86)/Oticon");
                 Directory.Delete("C:/ProgramData/Oticon");
+                Directory.Delete("C:/Program Files (x86)/Oticon");
+                MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
+                fined = true;
             }
-            if ((bool)Bernafon.IsChecked)
+            if ((bool)Bernafon.IsChecked && checkRunningProcess("Oasis") && !verifyInstanceOfExec("Bernafon"))
             {
                 deleteTrash("C:/ProgramData/Bernafon");
-                //deleteTrash("C:/Program Files (x86)/Bernafon");
+                deleteTrash("C:/Program Files (x86)/Bernafon");
                 Directory.Delete("C:/ProgramData/Bernafon");
+                Directory.Delete("C:/Program Files (x86)/Bernafon");
+                MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
+                fined = true;
             }
-            if ((bool)Sonic.IsChecked)
+            if ((bool)Sonic.IsChecked && checkRunningProcess("Expressfit") && !verifyInstanceOfExec("Sonic"))
             {
                 deleteTrash("C:/ProgramData/Sonic");
-                //deleteTrash("C:/Program Files (x86)/Sonic");
+                deleteTrash("C:/Program Files (x86)/Sonic");
                 Directory.Delete("C:/ProgramData/Sonic");
+                Directory.Delete("C:/Program Files (x86)/Sonic");
+                MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
+                fined = true;
             }
             //if (!checkBoxes())
             //{
             //    MessageBox.Show("Select Brand", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             //}
-
-            MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (!fined)
+            {
+                MessageBox.Show("Delete FS", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
             verifyInstalledBrands();
             updateLabels();
         }
@@ -432,6 +472,7 @@ namespace ReleaseApp
 
         private void btnuninstal_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Soon ...");
         }
 
         private void Brand_Unchecked(object sender, RoutedEventArgs e)
@@ -439,6 +480,8 @@ namespace ReleaseApp
             handleSelectedMarket();
             if (!checkBoxes())
             {
+                btnHattori.IsEnabled = false;
+                btnFS.IsEnabled = false;
                 btnDelete.IsEnabled = false;
                 btnUpdate.IsEnabled = false;
             }
@@ -447,6 +490,8 @@ namespace ReleaseApp
         private void Brand_Checked(object sender, RoutedEventArgs e)
         {
             handleSelectedMarket();
+            btnHattori.IsEnabled = true;
+            btnFS.IsEnabled = true;
             btnDelete.IsEnabled = true;
             btnUpdate.IsEnabled = true;
         }
