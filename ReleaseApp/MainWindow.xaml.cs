@@ -577,9 +577,9 @@ namespace ReleaseApp
             {
                 MessageBox.Show("Delete FS", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            
-            verifyInstalledBrands();
             updateLabels();
+            verifyInstalledBrands();
+            
         }
 
         private void btnFS_Click(object sender, RoutedEventArgs e)
