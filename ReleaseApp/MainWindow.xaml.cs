@@ -540,6 +540,7 @@ namespace ReleaseApp
                 MessageBox.Show("Close fitting software", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             updateLabels();
+            verifyInstalledBrands();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -565,11 +566,11 @@ namespace ReleaseApp
             }
             if ((bool)Sonic.IsChecked && checkRunningProcess("EXPRESSfit") && !verifyInstanceOfExec("Sonic"))
             {
-                //deleteTrash("C:/ProgramData/Sonic");
-                //deleteTrash("C:/Program Files (x86)/Sonic");
-                //Directory.Delete("C:/ProgramData/Sonic");
-                //Directory.Delete("C:/Program Files (x86)/Sonic");
-                //MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
+                deleteTrash("C:/ProgramData/Sonic");
+                deleteTrash("C:/Program Files (x86)/Sonic");
+                Directory.Delete("C:/ProgramData/Sonic");
+                Directory.Delete("C:/Program Files (x86)/Sonic");
+                MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
                 fined = true;
             }
             if (!fined)
@@ -600,17 +601,18 @@ namespace ReleaseApp
         {
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"))
+                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"))
+                 {
+                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"));
+                 }
+           
+                if ((bool)Oticon.IsChecked)
                 {
-                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"));
-                }
-            }
-            if ((bool)Oticon.IsChecked)
-            {
-                if (File.Exists("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe"))
-                {
-                    Process.Start("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe");
-                }
+                     if (File.Exists("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe"))
+                      {
+                         Process.Start("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe");
+                      }
+                 }
             }
 
             updateLabels();
@@ -732,6 +734,7 @@ namespace ReleaseApp
                 MessageBox.Show("Error, check file");
             }
             updateLabels();
+            verifyInstalledBrands();
         }
 
         private void btnDelete_logs(object sender, RoutedEventArgs e)
