@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReleaseApp"
         mc:Ignorable="d"
-        Title="Ultimate Changer" Height="426.3" Width="678.097" ResizeMode="NoResize">
+        Title="Ultimate Changer" Height="421.4" Width="678.194" ResizeMode="NoResize" Foreground="#FFFFB1B1">
+    <Window.Background>
+        <ImageBrush Opacity="0.2"/>
+    </Window.Background>
     <!--<Window.Icon>
         <BitmapImage UriSource="file:///C:/Users/Misiek/Documents/visual studio 2015/Projects/ReleaseApp/ReleaseApp/icon.jpg"/>
     </Window.Icon>-->
-    <Grid x:Name="panel">
+    <Grid x:Name="panel" Margin="0,10,0,0" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -21,7 +24,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="LightBlue" BorderThickness="0,0,0,1"/>
+
 
         <!-- #############################################################   BRAND SECTION    ###################################################### -->
         <Grid x:Name="BrandSection" Margin="10,0,0,0">
@@ -149,33 +152,42 @@
 
             <!--LOGO-->
             <Image x:Name="imgOticon" Grid.Column="0" Grid.Row="1" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100">
-                <Image.Source>D:\ReleaseApp\ReleaseApp/oticon2.png</Image.Source>
+                <Image.Source>C:/UltimateChanger/oticon2.png</Image.Source>
             </Image>
             <Image x:Name="imgBernafon" Grid.Column="0" Grid.Row="2" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,0.966">
-                <Image.Source>D:\ReleaseApp\ReleaseApp/bernafon2.png</Image.Source>
+                <Image.Source>C:/UltimateChanger/bernafon2.png</Image.Source>
             </Image>
             <Image x:Name="imgSonic" Grid.Column="0" Grid.Row="3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,1.349">
-                <Image.Source>D:\ReleaseApp\ReleaseApp/sonic2.png</Image.Source>
+                <Image.Source>C:/UltimateChanger/sonic2.png</Image.Source>
             </Image>
 
 
             <Button Grid.Column="1" Grid.Row="4" Margin="5" Content="All" Click="Button_Click"/>
+            <Image x:Name="imgOticon_Copy" Grid.Column="0" Grid.Row="1" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="31.5,19.5">
+                <Image.Source>
+                    <ImageSource>oticon2.png</ImageSource>
+                </Image.Source>
+            </Image>
 
         </Grid>
 
         <Label x:Name="lblSelectMarket" Grid.Row="0" Content="Select market:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ComboBox x:Name="cmbMarket" Grid.Column="1" MaxDropDownHeight="150" SelectedIndex="0" Grid.Row="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="142">
+        <Label x:Name="lblSelectLogMode" Content="Select log mode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,105,0,0" Grid.Column="1" Width="132"/>
+        <ComboBox x:Name="cmbMarket" Grid.Column="1" MaxDropDownHeight="150" SelectedIndex="0" Grid.Row="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="142" SelectionChanged="cmbMarket_SelectionChanged">
 
         </ComboBox>
-
+        <ComboBox x:Name="cmbLogMode" MaxDropDownHeight="150" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="10,136,0,0" Grid.Column="1"/>
         <Button x:Name="btnUpdate" Grid.Row="0" Content="Update market" HorizontalAlignment="Left" Margin="182,41,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="22" Click="btnUpdate_Click"/>
-        <Button x:Name="btnDelete" Grid.Row="1" Content="Delete trash" HorizontalAlignment="Left" Margin="35,36,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
+        <Button x:Name="btnLogMode" Grid.Row="0" Content="Update mode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="22" Click="btnChange_mode_log" Margin="182,136,0,0" Grid.Column="1"/>
+        <Button x:Name="btnDelete" Grid.Row="1" Content="Delete trash" HorizontalAlignment="Left" Margin="35,18,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click" Height="26"/>
+        <Button x:Name="btnDeletelogs" Grid.Row="0" Content="Delete logs file" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="22" Click="btnDelete_logs" Grid.Column="1" Margin="182,183,0,0" />
 
 
+        <Button x:Name="btnFS" Content="Start FS" HorizontalAlignment="Left" Margin="175,18,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnFS_Click" Height="26" RenderTransformOrigin="0.573,-0.192"/>
+        <Button x:Name="btnHattori" Content="Start Hattori" HorizontalAlignment="Left" Margin="175,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnHattori_Click" RenderTransformOrigin="0.373,0.85" Height="29"/>
+        <Button x:Name="btnuninstal" Content="Uninstall FS" HorizontalAlignment="Left" Margin="35,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnuninstal_Click" Height="29"/>
 
-        <Button x:Name="btnFS" Content="Start FS" HorizontalAlignment="Left" Margin="175,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnFS_Click" Height="26" RenderTransformOrigin="0.573,-0.192"/>
-        <Button x:Name="btnHattori" Content="Start Hattori" HorizontalAlignment="Left" Margin="175,76,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnHattori_Click"/>
-        <Button x:Name="btnuninstal" Content="Uninstall FS" HorizontalAlignment="Left" Margin="35,76,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnuninstal_Click"/>
+
 
     </Grid>
 </Window>
