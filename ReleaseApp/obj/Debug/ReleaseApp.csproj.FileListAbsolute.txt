@@ -54,3 +54,16 @@ C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.CoreCompileInputs.cache
 C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.exe
 C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.pdb
 C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Debug\ReleaseApp.exe.config
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Debug\ReleaseApp.exe
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Debug\ReleaseApp.pdb
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\MainWindow.g.cs
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\App.g.cs
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.lref
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\MainWindow.baml
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.g.resources
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.Properties.Resources.resources
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.exe
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.pdb

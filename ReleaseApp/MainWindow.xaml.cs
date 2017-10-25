@@ -27,7 +27,7 @@ namespace ReleaseApp
         Dictionary<string, string> BrandtoSoft;
         List<string> marketIndex;
         public int counter2 = 0;
-
+        string[] marki = { "Genie", "Oasis", "EXPRESSfit" };
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +41,7 @@ namespace ReleaseApp
             imgSonic.Source = new BitmapImage(new Uri($"{path}/sonic2.png", UriKind.Absolute));
             imgOticon.Source = new BitmapImage(new Uri($"{path}/oticon2.png", UriKind.Absolute));
             imgBernafon.Source = new BitmapImage(new Uri($"{path}/bernafon2.png", UriKind.Absolute));
+            
             btnDelete.IsEnabled = false;
             btnUpdate.IsEnabled = false;
             btnLogMode.IsEnabled = false;
@@ -518,7 +519,6 @@ namespace ReleaseApp
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             bool message = false;
-            string[] marki = { "Genie","Oasis","EXPRESSfit" };
             int count3 = 0;
             foreach (CheckBox checkbox in checkBoxList)
             {
@@ -563,13 +563,13 @@ namespace ReleaseApp
                 MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
                 fined = true;
             }
-            if ((bool)Sonic.IsChecked && checkRunningProcess("Expressfit") && !verifyInstanceOfExec("Sonic"))
+            if ((bool)Sonic.IsChecked && checkRunningProcess("EXPRESSfit") && !verifyInstanceOfExec("Sonic"))
             {
-                deleteTrash("C:/ProgramData/Sonic");
-                deleteTrash("C:/Program Files (x86)/Sonic");
-                Directory.Delete("C:/ProgramData/Sonic");
-                Directory.Delete("C:/Program Files (x86)/Sonic");
-                MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
+                //deleteTrash("C:/ProgramData/Sonic");
+                //deleteTrash("C:/Program Files (x86)/Sonic");
+                //Directory.Delete("C:/ProgramData/Sonic");
+                //Directory.Delete("C:/Program Files (x86)/Sonic");
+                //MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
                 fined = true;
             }
             if (!fined)
@@ -583,12 +583,14 @@ namespace ReleaseApp
 
         private void btnFS_Click(object sender, RoutedEventArgs e)
         {
+            int counter_proc = 0;
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/{BrandtoSoft[checkbox.Name]}2/{BrandtoSoft[checkbox.Name]}.exe") && checkRunningProcess(BrandtoSoft[checkbox.Name]))
+                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/{BrandtoSoft[checkbox.Name]}2/{BrandtoSoft[checkbox.Name]}.exe") && checkRunningProcess(marki[counter_proc]))
                 {
                  Process.Start($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/{BrandtoSoft[checkbox.Name]}2/{BrandtoSoft[checkbox.Name]}.exe");
                 }
+                counter_proc++;
             }
             updateLabels();
             verifyInstalledBrands();
@@ -737,26 +739,29 @@ namespace ReleaseApp
             bool message = false;
             bool message2 = false;
             bool deleted = false;
+            int counter_proc = 0;
             foreach (CheckBox checkbox in checkBoxList)
             {
                 if ((bool)checkbox.IsChecked) //analiza => jeden zaznaczony dwa nie 
                 {
-                    if (checkRunningProcess(BrandtoSoft[checkbox.Name]))
+                    if (checkRunningProcess(marki[counter_proc]))
                     {
                        deleteLogs(checkbox.Name.ToString());
                        deleted = true;
+                       
                     }
                     else
                     {
                         message = true;
                     }
-                    
+                    message2 = false;
                 }
                 else
                 {
                     message2 = true;
                     
                 }
+                counter_proc++;
             }
             if (message2 && !deleted)
             {
