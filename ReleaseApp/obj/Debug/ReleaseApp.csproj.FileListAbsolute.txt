@@ -66,3 +66,35 @@ C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.Properti
 C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
 C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.exe
 C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.pdb
+<<<<<<< HEAD
+=======
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\bin\Debug\ReleaseApp.exe.config
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\bin\Debug\ReleaseApp.exe
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\bin\Debug\ReleaseApp.pdb
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\MainWindow.g.cs
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\App.g.cs
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.lref
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\MainWindow.baml
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.g.resources
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.Properties.Resources.resources
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.csproj.CoreCompileInputs.cache
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.exe
+C:\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.pdb
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\bin\Debug\ReleaseApp.exe.config
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.exe
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.pdb
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\bin\Debug\ReleaseApp.exe
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\bin\Debug\ReleaseApp.pdb
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\MainWindow.g.cs
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\App.g.cs
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.cache
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp_MarkupCompile.lref
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\MainWindow.baml
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.g.resources
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.Properties.Resources.resources
+C:\Users\Misiek\Desktop\multi_changer-1bbca4ba70ec9b30acb93473105d0e8148e0ca51\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
+>>>>>>> ea883e83356955551987f0a90388172b20e2204d
