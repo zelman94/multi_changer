@@ -14,23 +14,24 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Media.Animation;
 
 namespace ReleaseApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
+
   
     public partial class MainWindow : Window
     {
-        List<CheckBox> checkBoxList;
         SortedDictionary<string, string> market;
         SortedDictionary<string, string> mode;
         Dictionary<string, string> BrandtoSoft;
         List<string> marketIndex;
-        public int counter2 = 0;
+        List<CheckBox> checkBoxList;
 
+        DoubleAnimation blinkAnimation;
+       
+        public int counter2 = 0;
+        string[] marki = { "Genie", "Oasis", "EXPRESSfit" };
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +40,12 @@ namespace ReleaseApp
             initializeElements();
             bindMarketDictionary();
             bindlogmode();
+            string path = Directory.GetCurrentDirectory();
+            //MessageBox.Show( path);
+            imgSonic.Source = new BitmapImage(new Uri($"{path}/sonic2.png", UriKind.Absolute));
+            imgOticon.Source = new BitmapImage(new Uri($"{path}/oticon2.png", UriKind.Absolute));
+            imgBernafon.Source = new BitmapImage(new Uri($"{path}/bernafon2.png", UriKind.Absolute));
+            
             btnDelete.IsEnabled = false;
             btnUpdate.IsEnabled = false;
             btnLogMode.IsEnabled = false;
@@ -46,9 +53,9 @@ namespace ReleaseApp
             btnuninstal.IsEnabled = false;
             btnDeletelogs.IsEnabled = false;
             btnFS.IsEnabled = false;
-
         }
-        
+        //________________________________________________________________________________________________________________________________________________
+
         void bindMarketDictionary()
         {
             market = new SortedDictionary<string, string>
@@ -120,7 +127,6 @@ namespace ReleaseApp
             cmbMarket.SelectedValuePath = "Value";        
         }
 
-
         void deleteLogs(string brand_name)
         {
 
@@ -152,7 +158,6 @@ namespace ReleaseApp
 
         }
 
-
         void bindlogmode()
         {
             mode = new SortedDictionary<string, string>
@@ -162,18 +167,10 @@ namespace ReleaseApp
                 { "Error", "ERROR"}
             };
 
-            marketIndex = new List<string>()
-            {
-                {"All"},
-                {"DEBUG"},
-                {"ERROR"}
-            };
-
             cmbLogMode.ItemsSource = mode;
             cmbLogMode.DisplayMemberPath = "Key";
             cmbLogMode.SelectedValuePath = "Value";
         }
-
 
         void handleSelectedMarket()
         {
@@ -188,12 +185,10 @@ namespace ReleaseApp
                     counter++;
                 }
             }
-            int a;
             foreach (CheckBox checkbox in checkBoxList)
             {      
                 if ((bool)checkbox.IsChecked && counter == 1)
                 {
-                    a = marketIndex.IndexOf(getData($"C:/ProgramData/{checkbox.Name}/Common/ManufacturerInfo.XML"));
                     cmbMarket.SelectedIndex = marketIndex.IndexOf(getData($"C:/ProgramData/{checkbox.Name}/Common/ManufacturerInfo.XML"));
                 }
                 else if (counter > 1)
@@ -289,8 +284,6 @@ namespace ReleaseApp
             return false;
         }
 
-    
-
         void updateLabels()
         {
             lblG.Foreground = new SolidColorBrush(Colors.Black);
@@ -338,8 +331,6 @@ namespace ReleaseApp
 
             }
         }
-
-
 
         bool changeLog_Mode(string source)
         {
@@ -396,10 +387,7 @@ namespace ReleaseApp
                             }
 
                         }
-
                         
-
-
                         if (counter != 23 && counter != 37 && counter != 34)
                         {
                             sw.WriteLine(line);
@@ -427,7 +415,6 @@ namespace ReleaseApp
             }
         }
 
-
         bool verifyInstanceOfExec(string name)
         {
             foreach (CheckBox checkbox in checkBoxList)
@@ -445,6 +432,7 @@ namespace ReleaseApp
             return false;
 
         }
+
         void verifyInstalledBrands()
         {
             if (!Directory.Exists("C:/ProgramData/Oticon"))
@@ -453,6 +441,7 @@ namespace ReleaseApp
                 lblG.Foreground = new SolidColorBrush(Colors.Red);
                 lblG.Content = "FS not installed";
                 Oticon.IsChecked = false;
+                oticonRectangle.Opacity = 0.2;
             }
             if (!Directory.Exists("C:/ProgramData/Bernafon"))
             {
@@ -460,6 +449,7 @@ namespace ReleaseApp
                 lblO.Foreground = new SolidColorBrush(Colors.Red);
                 lblO.Content = "FS not installed";
                 Bernafon.IsChecked = false;
+                bernafonRectangle.Opacity = 0.2;
             }
             if (!Directory.Exists("C:/ProgramData/Sonic"))
             {
@@ -467,6 +457,7 @@ namespace ReleaseApp
                 lblE.Foreground = new SolidColorBrush(Colors.Red);
                 lblE.Content = "FS not installed";
                 Sonic.IsChecked = false;
+                sonicnRectangle.Opacity = 0.2;
             }
         }
 
@@ -515,14 +506,32 @@ namespace ReleaseApp
             return true;
         }
 
+        void startAnimation()
+        {
+            blinkAnimation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.3,
+                Duration = TimeSpan.FromSeconds(1),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            if (Oticon.IsChecked == true)   oticonRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
+            if (Bernafon.IsChecked == true) bernafonRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
+            if (Sonic.IsChecked == true)    sonicnRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
+        }
 
- 
-
+        void stopAnimation()
+        {
+            blinkAnimation = new DoubleAnimation();
+            if (Oticon.IsChecked == false)   oticonRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
+            if (Bernafon.IsChecked == false) bernafonRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
+            if (Sonic.IsChecked == false)    sonicnRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
+        }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             bool message = false;
-            string[] marki = { "Genie","Oasis","EXPRESSfit" };
             int count3 = 0;
             foreach (CheckBox checkbox in checkBoxList)
             {
@@ -544,6 +553,7 @@ namespace ReleaseApp
                 MessageBox.Show("Close fitting software", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             updateLabels();
+            verifyInstalledBrands();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -567,7 +577,7 @@ namespace ReleaseApp
                 MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
                 fined = true;
             }
-            if ((bool)Sonic.IsChecked && checkRunningProcess("Expressfit") && !verifyInstanceOfExec("Sonic"))
+            if ((bool)Sonic.IsChecked && checkRunningProcess("EXPRESSfit") && !verifyInstanceOfExec("Sonic"))
             {
                 deleteTrash("C:/ProgramData/Sonic");
                 deleteTrash("C:/Program Files (x86)/Sonic");
@@ -576,27 +586,25 @@ namespace ReleaseApp
                 MessageBox.Show("Trash deleted successfully!", "deleteTrash", MessageBoxButton.OK, MessageBoxImage.Information);
                 fined = true;
             }
-            //if (!checkBoxes())
-            //{
-            //    MessageBox.Show("Select Brand", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //}
             if (!fined)
             {
                 MessageBox.Show("Delete FS", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            
-            verifyInstalledBrands();
             updateLabels();
+            verifyInstalledBrands();
+            
         }
 
         private void btnFS_Click(object sender, RoutedEventArgs e)
         {
+            int counter_proc = 0;
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/{BrandtoSoft[checkbox.Name]}2/{BrandtoSoft[checkbox.Name]}.exe"))
+                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/{BrandtoSoft[checkbox.Name]}2/{BrandtoSoft[checkbox.Name]}.exe") && checkRunningProcess(marki[counter_proc]))
                 {
                  Process.Start($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/{BrandtoSoft[checkbox.Name]}2/{BrandtoSoft[checkbox.Name]}.exe");
                 }
+                counter_proc++;
             }
             updateLabels();
             verifyInstalledBrands();
@@ -607,16 +615,17 @@ namespace ReleaseApp
             foreach (CheckBox checkbox in checkBoxList)
             {
                 if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"))
-                {
+                 {
                     Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"));
-                }
-            }
-            if ((bool)Oticon.IsChecked)
-            {
-                if (File.Exists("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe"))
+                 }
+           
+                if ((bool)Oticon.IsChecked)
                 {
-                    Process.Start("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe");
-                }
+                     if (File.Exists("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe"))
+                      {
+                         Process.Start("C:/Program Files (x86)/Oticon/FirmwareUpdater/FirmwareUpdater/FirmwareUpdater.exe");
+                      }
+                 }
             }
 
             updateLabels();
@@ -640,6 +649,7 @@ namespace ReleaseApp
                 btnLogMode.IsEnabled = false;
                 btnDeletelogs.IsEnabled = false;
             }
+            stopAnimation();
         }
 
         private void Brand_Checked(object sender, RoutedEventArgs e)
@@ -651,6 +661,7 @@ namespace ReleaseApp
             btnUpdate.IsEnabled = true;
             btnLogMode.IsEnabled = true;
             btnDeletelogs.IsEnabled = true;
+            startAnimation();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -738,29 +749,55 @@ namespace ReleaseApp
                 MessageBox.Show("Error, check file");
             }
             updateLabels();
+            verifyInstalledBrands();
         }
 
         private void btnDelete_logs(object sender, RoutedEventArgs e)
         {
             bool message = false;
+            bool message2 = false;
+            bool deleted = false;
+            int counter_proc = 0;
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && checkRunningProcess(BrandtoSoft[checkbox.Name]))
+                if ((bool)checkbox.IsChecked) //analiza => jeden zaznaczony dwa nie 
                 {
-                    deleteLogs(checkbox.Name.ToString());
-
+                    if (checkRunningProcess(marki[counter_proc]))
+                    {
+                       deleteLogs(checkbox.Name.ToString());
+                       deleted = true;
+                        MessageBox.Show($" Deleted logs for {checkbox.Name}");
+                       
+                    }
+                    else
+                    {
+                        message = true;
+                    }
+                    message2 = false;
                 }
                 else
                 {
-                    message = true;
+                    message2 = true;
+                    
                 }
+                counter_proc++;
+            }
+            if (message2 && !deleted)
+            {
+                MessageBox.Show("Select fitting software", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             if (message)
             {
                 MessageBox.Show("Close fitting software", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
             updateLabels();
             verifyInstalledBrands();
+        }
+
+        private void cmbLogMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 
