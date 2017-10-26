@@ -601,9 +601,9 @@ namespace ReleaseApp
         {
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"))
+                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"))
                  {
-                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"));
+                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"));
                  }
            
                 if ((bool)Oticon.IsChecked)
@@ -751,6 +751,7 @@ namespace ReleaseApp
                     {
                        deleteLogs(checkbox.Name.ToString());
                        deleted = true;
+                        MessageBox.Show($" Deleted logs for {checkbox.Name}");
                        
                     }
                     else
@@ -774,6 +775,7 @@ namespace ReleaseApp
             {
                 MessageBox.Show("Close fitting software", "Brand", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
             updateLabels();
             verifyInstalledBrands();
         }

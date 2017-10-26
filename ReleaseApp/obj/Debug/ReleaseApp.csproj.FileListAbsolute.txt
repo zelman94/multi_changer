@@ -53,7 +53,6 @@ C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.GenerateResource.Cache
 C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csproj.CoreCompileInputs.cache
 C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.exe
 C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.pdb
-C:\ReleaseApp\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
 C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Debug\ReleaseApp.exe.config
 C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Debug\ReleaseApp.exe
 C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Debug\ReleaseApp.pdb
