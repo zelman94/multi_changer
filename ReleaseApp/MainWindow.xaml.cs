@@ -14,10 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
-<<<<<<< HEAD
-=======
 using System.Windows.Media.Animation;
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
 
 namespace ReleaseApp
 {
@@ -25,21 +22,14 @@ namespace ReleaseApp
   
     public partial class MainWindow : Window
     {
-<<<<<<< HEAD
-        List<CheckBox> checkBoxList;
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         SortedDictionary<string, string> market;
         SortedDictionary<string, string> mode;
         Dictionary<string, string> BrandtoSoft;
         List<string> marketIndex;
-<<<<<<< HEAD
-=======
         List<CheckBox> checkBoxList;
 
         DoubleAnimation blinkAnimation;
        
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         public int counter2 = 0;
         string[] marki = { "Genie", "Oasis", "EXPRESSfit" };
         public MainWindow()
@@ -63,15 +53,9 @@ namespace ReleaseApp
             btnuninstal.IsEnabled = false;
             btnDeletelogs.IsEnabled = false;
             btnFS.IsEnabled = false;
-<<<<<<< HEAD
-
-        }
-        
-=======
         }
         //________________________________________________________________________________________________________________________________________________
 
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         void bindMarketDictionary()
         {
             market = new SortedDictionary<string, string>
@@ -143,10 +127,6 @@ namespace ReleaseApp
             cmbMarket.SelectedValuePath = "Value";        
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         void deleteLogs(string brand_name)
         {
 
@@ -178,10 +158,6 @@ namespace ReleaseApp
 
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         void bindlogmode()
         {
             mode = new SortedDictionary<string, string>
@@ -191,25 +167,11 @@ namespace ReleaseApp
                 { "Error", "ERROR"}
             };
 
-<<<<<<< HEAD
-            marketIndex = new List<string>()
-            {
-                {"All"},
-                {"DEBUG"},
-                {"ERROR"}
-            };
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             cmbLogMode.ItemsSource = mode;
             cmbLogMode.DisplayMemberPath = "Key";
             cmbLogMode.SelectedValuePath = "Value";
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         void handleSelectedMarket()
         {
             int counter = 0;
@@ -223,18 +185,10 @@ namespace ReleaseApp
                     counter++;
                 }
             }
-<<<<<<< HEAD
-            int a;
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             foreach (CheckBox checkbox in checkBoxList)
             {      
                 if ((bool)checkbox.IsChecked && counter == 1)
                 {
-<<<<<<< HEAD
-                    a = marketIndex.IndexOf(getData($"C:/ProgramData/{checkbox.Name}/Common/ManufacturerInfo.XML"));
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
                     cmbMarket.SelectedIndex = marketIndex.IndexOf(getData($"C:/ProgramData/{checkbox.Name}/Common/ManufacturerInfo.XML"));
                 }
                 else if (counter > 1)
@@ -330,11 +284,6 @@ namespace ReleaseApp
             return false;
         }
 
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         void updateLabels()
         {
             lblG.Foreground = new SolidColorBrush(Colors.Black);
@@ -383,11 +332,6 @@ namespace ReleaseApp
             }
         }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         bool changeLog_Mode(string source)
         {
             string[] oldFile;
@@ -471,10 +415,6 @@ namespace ReleaseApp
             }
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         bool verifyInstanceOfExec(string name)
         {
             foreach (CheckBox checkbox in checkBoxList)
@@ -492,10 +432,7 @@ namespace ReleaseApp
             return false;
 
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         void verifyInstalledBrands()
         {
             if (!Directory.Exists("C:/ProgramData/Oticon"))
@@ -504,10 +441,7 @@ namespace ReleaseApp
                 lblG.Foreground = new SolidColorBrush(Colors.Red);
                 lblG.Content = "FS not installed";
                 Oticon.IsChecked = false;
-<<<<<<< HEAD
-=======
                 oticonRectangle.Opacity = 0.2;
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             }
             if (!Directory.Exists("C:/ProgramData/Bernafon"))
             {
@@ -515,10 +449,7 @@ namespace ReleaseApp
                 lblO.Foreground = new SolidColorBrush(Colors.Red);
                 lblO.Content = "FS not installed";
                 Bernafon.IsChecked = false;
-<<<<<<< HEAD
-=======
                 bernafonRectangle.Opacity = 0.2;
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             }
             if (!Directory.Exists("C:/ProgramData/Sonic"))
             {
@@ -526,10 +457,7 @@ namespace ReleaseApp
                 lblE.Foreground = new SolidColorBrush(Colors.Red);
                 lblE.Content = "FS not installed";
                 Sonic.IsChecked = false;
-<<<<<<< HEAD
-=======
                 sonicnRectangle.Opacity = 0.2;
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             }
         }
 
@@ -577,9 +505,6 @@ namespace ReleaseApp
             }
             return true;
         }
-<<<<<<< HEAD
-        
-=======
 
         void startAnimation()
         {
@@ -603,7 +528,6 @@ namespace ReleaseApp
             if (Bernafon.IsChecked == false) bernafonRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
             if (Sonic.IsChecked == false)    sonicnRectangle.BeginAnimation(Rectangle.OpacityProperty, blinkAnimation);
         }
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -690,9 +614,9 @@ namespace ReleaseApp
         {
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"))
+                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"))
                  {
-                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"));
+                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"));
                  }
            
                 if ((bool)Oticon.IsChecked)
@@ -725,10 +649,7 @@ namespace ReleaseApp
                 btnLogMode.IsEnabled = false;
                 btnDeletelogs.IsEnabled = false;
             }
-<<<<<<< HEAD
-=======
             stopAnimation();
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         }
 
         private void Brand_Checked(object sender, RoutedEventArgs e)
@@ -740,10 +661,7 @@ namespace ReleaseApp
             btnUpdate.IsEnabled = true;
             btnLogMode.IsEnabled = true;
             btnDeletelogs.IsEnabled = true;
-<<<<<<< HEAD
-=======
             startAnimation();
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -876,14 +794,16 @@ namespace ReleaseApp
             updateLabels();
             verifyInstalledBrands();
         }
-<<<<<<< HEAD
-=======
 
         private void cmbLogMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
+
+        private void btninstal_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }
