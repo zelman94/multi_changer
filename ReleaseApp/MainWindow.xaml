@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReleaseApp"
         mc:Ignorable="d"
-        Title="Ultimate Changer" Height="450.0" Width="750.0" ResizeMode="NoResize" Foreground="#FFFFB1B1">
+        Title="Ultimate Changer" Height="450.0" Width="750.0" ResizeMode="NoResize">
+    <Window.Foreground>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FFEAFFA0" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Foreground>
     <Window.Background>
-        <ImageBrush Opacity="0.2"/>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FF9FFF11" Offset="1"/>
+        </LinearGradientBrush>
     </Window.Background>
     <!--<Window.Icon>
         <BitmapImage UriSource="file:///C:/Users/Misiek/Documents/visual studio 2015/Projects/ReleaseApp/ReleaseApp/icon.jpg"/>
@@ -85,7 +94,7 @@
                 Grid.Row="3"
                 Fill="Blue"   RadiusY="27.4" RadiusX="27.4">
             </Rectangle>
-            
+
             <!--LOGO-->
             <Image x:Name="imgOticon" Grid.Column="0" Grid.Row="1" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100">
                 <Image.Source>C:/UltimateChanger/oticon2.png</Image.Source>
@@ -111,7 +120,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="9*"/>
                 <RowDefinition Height="15*"/>
-                
+
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" BorderBrush="LightBlue" BorderThickness="0,0,0,1"/>
@@ -134,6 +143,9 @@
         <Button x:Name="btnFS" Content="Start FS" HorizontalAlignment="Left" Margin="175,18,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnFS_Click" Height="26" RenderTransformOrigin="0.573,-0.192"/>
         <Button x:Name="btnHattori" Content="Start Hattori" HorizontalAlignment="Left" Margin="175,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnHattori_Click" RenderTransformOrigin="0.373,0.85" Height="29"/>
         <Button x:Name="btnuninstal" Content="Uninstall FS" HorizontalAlignment="Left" Margin="35,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnuninstal_Click" Height="29"/>
+        <ComboBox x:Name="cmbbuild" Grid.Column="1" HorizontalAlignment="Left" Margin="32,58.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142"/>
+        <Button x:Name="btninstal" Content="Install" Grid.Column="1" HorizontalAlignment="Left" Margin="217,58.8,0,0" VerticalAlignment="Top" Width="120" Height="22" Click="btninstal_Click" Grid.Row="1"/>
+        <ComboBox x:Name="cmbbrandstoinstall" Grid.Column="1" HorizontalAlignment="Left" Margin="32,17.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142" Height="26" SelectionChanged="cmbbrandstoinstall_SelectionChanged"/>
 
 
 

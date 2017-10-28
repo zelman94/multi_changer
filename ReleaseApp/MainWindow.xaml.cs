@@ -15,21 +15,24 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
+using System.Data.SqlClient;
 
 namespace ReleaseApp
 {
 
   
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window 
     {
         SortedDictionary<string, string> market;
         SortedDictionary<string, string> mode;
+        SortedDictionary<string, string> brands;
+        SortedDictionary<string, string> builde;
         Dictionary<string, string> BrandtoSoft;
         List<string> marketIndex;
         List<CheckBox> checkBoxList;
-
+        DirectoryInfo[] nameFolders;
         DoubleAnimation blinkAnimation;
-       
+        
         public int counter2 = 0;
         string[] marki = { "Genie", "Oasis", "EXPRESSfit" };
         public MainWindow()
@@ -40,6 +43,9 @@ namespace ReleaseApp
             initializeElements();
             bindMarketDictionary();
             bindlogmode();
+            //ConnectToDB();
+            cbindBrandsToInstall();
+
             string path = Directory.GetCurrentDirectory();
             //MessageBox.Show( path);
             imgSonic.Source = new BitmapImage(new Uri($"{path}/sonic2.png", UriKind.Absolute));
@@ -55,6 +61,26 @@ namespace ReleaseApp
             btnFS.IsEnabled = false;
         }
         //________________________________________________________________________________________________________________________________________________
+
+
+            void ConnectToDB()
+        {
+            try//Server=tcp:t   estbazy.database.windows.net,1433;Initial Catalog=DGS_Multi_changer;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+            {
+                SqlConnection myConnection = new SqlConnection("server=mysql.cba.pl	;" +
+                            "Trusted_Connection=yes;" +
+                            "database=zelman; " +
+                            "connection timeout=10");
+                myConnection.Open();
+                MessageBox.Show("Well done!");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("You failed!" + ex.Message);
+            }
+
+        }
+
 
         void bindMarketDictionary()
         {
@@ -170,6 +196,36 @@ namespace ReleaseApp
             cmbLogMode.ItemsSource = mode;
             cmbLogMode.DisplayMemberPath = "Key";
             cmbLogMode.SelectedValuePath = "Value";
+        }
+
+        void cbindBuild(string path)
+        {
+            getNamesInstallationFolders(path);
+
+            builde = new SortedDictionary<string, string>();
+
+            for (int i = 0; i < nameFolders.Length; i++)
+            {
+                builde.Add(nameFolders[i].ToString(), nameFolders[i].ToString());
+            }
+
+            cmbbuild.ItemsSource = builde;
+            cmbbuild.DisplayMemberPath = "Key";
+            cmbbuild.SelectedValuePath = "Value";
+        }
+
+        void cbindBrandsToInstall()
+        {
+            brands = new SortedDictionary<string, string>
+            {
+                { "Genie", "Oticon"},
+                { "Oasis", "Bernafon"},
+                { "EXPRESSfit", "Sonic"}
+            };
+
+            cmbbrandstoinstall.ItemsSource = brands;
+            cmbbrandstoinstall.DisplayMemberPath = "Key";
+            cmbbrandstoinstall.SelectedValuePath = "Value";
         }
 
         void handleSelectedMarket()
@@ -614,9 +670,9 @@ namespace ReleaseApp
         {
             foreach (CheckBox checkbox in checkBoxList)
             {
-                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"))
+                if ((bool)checkbox.IsChecked && File.Exists($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"))
                  {
-                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/FirmwareUpdater/FirmwareUpdater.exe"));
+                    Process.Start(($"C:/Program Files (x86)/{checkbox.Name}/{BrandtoSoft[checkbox.Name]}/FirmwareUpdater/FirmwareUpdater.exe"));
                  }
            
                 if ((bool)Oticon.IsChecked)
@@ -798,6 +854,71 @@ namespace ReleaseApp
         private void cmbLogMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        void getNamesInstallationFolders(string DirectoryName)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(DirectoryName);
+            nameFolders = di.EnumerateDirectories().ToArray();
+      
+
+        }
+
+
+        private void btninstal_Click(object sender, RoutedEventArgs e)
+        {
+            string[] marki = { "EXPRESSfit", "Genie", "Oasis" };
+
+            if (cmbbrandstoinstall.SelectedIndex > -1 && cmbbuild.SelectedIndex > -1)
+            {
+                if (!verifyInstanceOfExec(cmbbrandstoinstall.SelectedValue.ToString()))
+                {
+                    try
+                    {
+                        Process.Start($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}/{cmbbuild.SelectedValue.ToString()}/Full/{cmbbrandstoinstall.SelectedValue.ToString()}/Setup.exe");
+
+                    }
+                    catch (Exception)
+                    {
+                        try
+                        { //sciezka do dunskiego
+                            Process.Start($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}/{cmbbuild.SelectedValue.ToString()}/Full/{cmbbrandstoinstall.SelectedValue.ToString()}/Setup.exe");
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("no assess to file");
+                        }
+                        
+                    }
+                    MessageBox.Show($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}/{cmbbuild.SelectedValue.ToString()}/Full/{cmbbrandstoinstall.SelectedValue.ToString()}/Setup.exe");
+                }
+                else
+                {
+                    MessageBox.Show("Brand already installed");
+                }
+               
+            }
+
+            
+        }
+
+        private void cmbbrandstoinstall_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string[] marki = { "EXPRESSfit","Genie", "Oasis"  };
+            if (cmbbrandstoinstall.SelectedIndex > -1)
+            {
+                try
+                {
+                    cbindBuild($"D:/test apki/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No Access to directory");
+                    throw;
+                }
+               
+            }  
         }
     }
 
