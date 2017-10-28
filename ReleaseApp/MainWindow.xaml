@@ -5,11 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReleaseApp"
         mc:Ignorable="d"
-<<<<<<< HEAD
-        Title="Ultimate Changer" Height="421.4" Width="678.194" ResizeMode="NoResize" Foreground="#FFFFB1B1">
-=======
         Title="Ultimate Changer" Height="450.0" Width="750.0" ResizeMode="NoResize" Foreground="#FFFFB1B1">
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
     <Window.Background>
         <ImageBrush Opacity="0.2"/>
     </Window.Background>
@@ -31,11 +27,7 @@
 
 
         <!-- #############################################################   BRAND SECTION    ###################################################### -->
-<<<<<<< HEAD
-        <Grid x:Name="BrandSection" Margin="10,0,0,0">
-=======
         <Grid x:Name="BrandSection" Margin="10,0,15,0">
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
@@ -74,31 +66,6 @@
                 Height="50"
                 Width="130"
                 Fill="DarkViolet" RadiusY="27.4" RadiusX="27.4" RenderTransformOrigin="0.465,0.738">
-<<<<<<< HEAD
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.226"/>
-                        <TranslateTransform X="-0.06" Y="0.022"/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="Rectangle.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation x:Name="oticonStory"
-                                    Storyboard.TargetName="oticonRectangle" 
-                                    Storyboard.TargetProperty="Opacity"
-                                    From="1.0" To="0.3" Duration="0:0:1" 
-                                    AutoReverse="True" RepeatBehavior="Forever" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Rectangle.Triggers>
-
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             </Rectangle>
 
             <Rectangle
@@ -108,30 +75,6 @@
                 Height="50"
                 Width="130"
                 Fill="Red"  RadiusY="27.4" RadiusX="27.4">
-<<<<<<< HEAD
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.226"/>
-                        <TranslateTransform X="0.021" Y="0.029"/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetName="bernafonRectangle" 
-                                    Storyboard.TargetProperty="Opacity"
-                                    From="1.0" To="0.3" Duration="0:0:5" 
-                                    AutoReverse="True" RepeatBehavior="Forever" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Rectangle.Triggers>
-=======
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
             </Rectangle>
 
             <Rectangle
@@ -140,44 +83,17 @@
                 Width="130"
                 Grid.Column="0"
                 Grid.Row="3"
-<<<<<<< HEAD
-                Fill="Blue"   RadiusY="27.4" RadiusX="27.4" RenderTransformOrigin="0.465,0.738">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.226"/>
-                        <TranslateTransform X="-0.06" Y="0.022"/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="Rectangle.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetName="sonicnRectangle" 
-                                    Storyboard.TargetProperty="Opacity"
-                                    From="1.0" To="0.3" Duration="0:0:5" 
-                                    AutoReverse="True" RepeatBehavior="Forever" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Rectangle.Triggers>
-            </Rectangle>
-
-=======
                 Fill="Blue"   RadiusY="27.4" RadiusX="27.4">
             </Rectangle>
-            
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
+
             <!--LOGO-->
             <Image x:Name="imgOticon" Grid.Column="0" Grid.Row="1" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100">
                 <Image.Source>C:/UltimateChanger/oticon2.png</Image.Source>
             </Image>
-            <Image x:Name="imgBernafon" Grid.Column="0" Grid.Row="2" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,0.966">
+            <Image x:Name="imgBernafon" Grid.Column="0" Grid.Row="2" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100">
                 <Image.Source>C:/UltimateChanger/bernafon2.png</Image.Source>
             </Image>
-            <Image x:Name="imgSonic" Grid.Column="0" Grid.Row="3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" RenderTransformOrigin="0.526,1.349">
+            <Image x:Name="imgSonic" Grid.Column="0" Grid.Row="3" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100">
                 <Image.Source>C:/UltimateChanger/sonic2.png</Image.Source>
             </Image>
 
@@ -190,25 +106,12 @@
             </Image>
 
         </Grid>
-<<<<<<< HEAD
-
-        <Label x:Name="lblSelectMarket" Grid.Row="0" Content="Select market:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label x:Name="lblSelectLogMode" Content="Select log mode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,105,0,0" Grid.Column="1" Width="132"/>
-        <ComboBox x:Name="cmbMarket" Grid.Column="1" MaxDropDownHeight="150" SelectedIndex="0" Grid.Row="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="142" SelectionChanged="cmbMarket_SelectionChanged">
-
-        </ComboBox>
-        <ComboBox x:Name="cmbLogMode" MaxDropDownHeight="150" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Margin="10,136,0,0" Grid.Column="1"/>
-        <Button x:Name="btnUpdate" Grid.Row="0" Content="Update market" HorizontalAlignment="Left" Margin="182,41,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="22" Click="btnUpdate_Click"/>
-        <Button x:Name="btnLogMode" Grid.Row="0" Content="Update mode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="22" Click="btnChange_mode_log" Margin="182,136,0,0" Grid.Column="1"/>
-        <Button x:Name="btnDelete" Grid.Row="1" Content="Delete trash" HorizontalAlignment="Left" Margin="35,18,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click" Height="26"/>
-        <Button x:Name="btnDeletelogs" Grid.Row="0" Content="Delete logs file" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="22" Click="btnDelete_logs" Grid.Column="1" Margin="182,183,0,0" />
-=======
         <!-- #############################################################   COMBO SECTION    ###################################################### -->
         <Grid x:Name="ComboSection" Grid.Column="1" Margin="15,0,10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="9*"/>
                 <RowDefinition Height="15*"/>
-                
+
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" BorderBrush="LightBlue" BorderThickness="0,0,0,1"/>
@@ -226,12 +129,13 @@
         <Button x:Name="btnLogMode" Grid.Row="0" Content="Update mode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="22" Click="btnChange_mode_log" Margin="217,126,0,0" Grid.Column="1"/>
         <Button x:Name="btnDelete" Grid.Row="1" Content="Delete trash" HorizontalAlignment="Left" Margin="35,18,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click" Height="26"/>
         <Button x:Name="btnDeletelogs" Grid.Row="0" Content="Delete logs file" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="22" Click="btnDelete_logs" Grid.Column="1" Margin="217,161,0,0" />
->>>>>>> ea883e83356955551987f0a90388172b20e2204d
 
 
         <Button x:Name="btnFS" Content="Start FS" HorizontalAlignment="Left" Margin="175,18,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnFS_Click" Height="26" RenderTransformOrigin="0.573,-0.192"/>
         <Button x:Name="btnHattori" Content="Start Hattori" HorizontalAlignment="Left" Margin="175,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnHattori_Click" RenderTransformOrigin="0.373,0.85" Height="29"/>
         <Button x:Name="btnuninstal" Content="Uninstall FS" HorizontalAlignment="Left" Margin="35,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="btnuninstal_Click" Height="29"/>
+        <ComboBox x:Name="cmbbuild" Grid.Column="1" HorizontalAlignment="Left" Margin="32,22,0,0" Grid.Row="1" VerticalAlignment="Top" Width="142"/>
+        <Button x:Name="btninstal" Content="Install" Grid.Column="1" HorizontalAlignment="Left" Margin="217,22,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="22" Click="btninstal_Click"/>
 
 
 
