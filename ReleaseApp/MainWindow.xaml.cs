@@ -16,7 +16,8 @@ using System.IO;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
 using System.Data.SqlClient;
-
+using MySql;
+using MySql.Data.MySqlClient;
 namespace ReleaseApp
 {
 
@@ -32,7 +33,11 @@ namespace ReleaseApp
         List<CheckBox> checkBoxList;
         DirectoryInfo[] nameFolders;
         DoubleAnimation blinkAnimation;
-        
+        MySqlConnection SQL_Connection;
+        List<string> Name_actual_FS;
+
+
+
         public int counter2 = 0;
         string[] marki = { "Genie", "Oasis", "EXPRESSfit" };
         public MainWindow()
@@ -43,7 +48,8 @@ namespace ReleaseApp
             initializeElements();
             bindMarketDictionary();
             bindlogmode();
-            //ConnectToDB();
+            SQL_Connection = ConnectToDB();
+            Name_actual_FS = CheckActualVersionFS(SQL_Connection);
             cbindBrandsToInstall();
 
             string path = Directory.GetCurrentDirectory();
@@ -59,28 +65,103 @@ namespace ReleaseApp
             btnuninstal.IsEnabled = false;
             btnDeletelogs.IsEnabled = false;
             btnFS.IsEnabled = false;
+            Console.WriteLine("UserName: {0}", Environment.UserName); // nazwa usera
+            set_logs_to_DB(SQL_Connection);
         }
         //________________________________________________________________________________________________________________________________________________
 
 
-            void ConnectToDB()
+        MySqlConnection ConnectToDB()
         {
-            try//Server=tcp:t   estbazy.database.windows.net,1433;Initial Catalog=DGS_Multi_changer;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+            try
             {
-                SqlConnection myConnection = new SqlConnection("server=mysql.cba.pl	;" +
-                            "Trusted_Connection=yes;" +
-                            "database=zelman; " +
-                            "connection timeout=10");
-                myConnection.Open();
-                MessageBox.Show("Well done!");
+                string tmp= "server=zadanko-z-zutu.cba.pl;" +
+                                    "database=zelman;" +
+                                   "uid=zelman;" +
+                                   "password=Santiego94;";
+                MySqlConnection sqlConn = new MySqlConnection(tmp);
+                return sqlConn;
             }
-            catch (SqlException ex)
+
+            catch (Exception e)
             {
-                MessageBox.Show("You failed!" + ex.Message);
+                Console.WriteLine("Wystąpił nieoczekiwany błąd!");
+                Console.WriteLine(e.Message);
+                return null;
+            }        
+    }
+
+        void set_logs_to_DB(MySqlConnection SQL_Connection_fun)
+        {
+            try
+            {
+                if (SQL_Connection_fun != null)
+                {
+                    SQL_Connection_fun.Open();
+
+                    MySqlCommand myCommand = new MySqlCommand($"INSERT INTO Logs VALUES ('{Environment.UserName}',0,0)", SQL_Connection_fun);
+
+                    SQL_Connection_fun.Close();
+                }
             }
+            catch (Exception)
+            {
+
+               
+            }
+
+
+
 
         }
 
+
+        List<string> CheckActualVersionFS(MySqlConnection SQL_Connection_fun)
+        {
+            //string statement;
+            List<string> statement = new List<string>();
+            List<string> name_ = new List<string>(); //directory for actual version Name_numberBuild
+            if (SQL_Connection_fun != null)
+            {
+               
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM BD_FOR_MultiChanger_DGS WHERE actual = '1';", SQL_Connection_fun);
+        try
+        {
+                    SQL_Connection_fun.Open();
+                    //Example query is: SELECT entity_id FROM catalog_product_flat_1 WHERE sku='itemSku';
+
+
+                    MySqlCommand myCommand = new MySqlCommand("SELECT * FROM BD_FOR_MultiChanger_DGS WHERE actual = '1'", SQL_Connection_fun);
+
+                    MySqlDataReader myReader;
+                    myReader = myCommand.ExecuteReader();
+                    myReader.Read();
+
+                    
+                        statement.Add(myReader.GetString(0));
+
+                        statement.Add(myReader.GetString(1));
+
+                        statement.Add(myReader.GetString(2)); // nazwa katalogu aktualnego
+
+                        statement.Add(myReader.GetString(3)); // 1 = actual build
+                    myReader.Close();
+                    name_.Add($"Genie_{statement[2]}");
+                    name_.Add($"Oasis_{statement[2]}");
+                    name_.Add($"Expressfit_{statement[2]}");
+                    name_.Add($"ExpressFit_{statement[2]}");
+
+
+
+                }
+                catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+                    SQL_Connection_fun.Close();
+        }
+            }
+            return name_;
+        }
 
         void bindMarketDictionary()
         {
@@ -209,10 +290,31 @@ namespace ReleaseApp
                 builde.Add(nameFolders[i].ToString(), nameFolders[i].ToString());
             }
 
-            cmbbuild.ItemsSource = builde;
-            cmbbuild.DisplayMemberPath = "Key";
-            cmbbuild.SelectedValuePath = "Value";
+            cmbBuild.ItemsSource = builde;
+            cmbBuild.DisplayMemberPath = "Key";
+            cmbBuild.SelectedValuePath = "Value";
+            int licz = 0;
+            SQL_Connection = ConnectToDB();
+            Name_actual_FS = CheckActualVersionFS(SQL_Connection);
+            foreach (var item in builde)
+            {
+                for (int i=0;i < Name_actual_FS.Count;i++) {
+                    if (item.Value.ToString() == Name_actual_FS[i].ToString())
+                    {
+                        cmbBuild.SelectedIndex = licz;
+                    }
+                }
+                licz++;
+            }
+
+            //cmbBuild.SelectedIndex = builde.();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
+
 
         void cbindBrandsToInstall()
         {
@@ -223,9 +325,9 @@ namespace ReleaseApp
                 { "EXPRESSfit", "Sonic"}
             };
 
-            cmbbrandstoinstall.ItemsSource = brands;
-            cmbbrandstoinstall.DisplayMemberPath = "Key";
-            cmbbrandstoinstall.SelectedValuePath = "Value";
+            cmbBrandstoinstall.ItemsSource = brands;
+            cmbBrandstoinstall.DisplayMemberPath = "Key";
+            cmbBrandstoinstall.SelectedValuePath = "Value";
         }
 
         void handleSelectedMarket()
@@ -867,58 +969,136 @@ namespace ReleaseApp
 
         private void btninstal_Click(object sender, RoutedEventArgs e)
         {
-            string[] marki = { "EXPRESSfit", "Genie", "Oasis" };
-
-            if (cmbbrandstoinstall.SelectedIndex > -1 && cmbbuild.SelectedIndex > -1)
+            string[] marki = { "ExpressFit", "Genie", "Oasis" };
+            string[] marki_dun = { "EXPRESSFit", "Genie", "Oasis" };
+            bool installation_done = false;
+            if (cmbBrandstoinstall.SelectedIndex > -1 && cmbBuild.SelectedIndex > -1)
             {
-                if (!verifyInstanceOfExec(cmbbrandstoinstall.SelectedValue.ToString()))
+                if (!verifyInstanceOfExec(cmbBrandstoinstall.SelectedValue.ToString()))
                 {
                     try
                     {
-                        Process.Start($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}/{cmbbuild.SelectedValue.ToString()}/Full/{cmbbrandstoinstall.SelectedValue.ToString()}/Setup.exe");
-
-                    }
-                    catch (Exception)
-                    {
-                        try
-                        { //sciezka do dunskiego
-                            Process.Start($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}/{cmbbuild.SelectedValue.ToString()}/Full/{cmbbrandstoinstall.SelectedValue.ToString()}/Setup.exe");
-
-                        }
-                        catch (Exception)
+                        //sciezka szczecin full
+                        //string  tmp = @"\\10.128.3.1\DFS_Data_SSC_FS_GenieBuilds\Phoenix\{marki[cmbbrandstoinstall.SelectedIndex]}\{cmbbuild.SelectedValue.ToString()}\Full\{cmbbrandstoinstall.SelectedValue.ToString()}\";
+                        string tmp2 = @"\\10.128.3.1\DFS_Data_SSC_FS_GenieBuilds\Phoenix\" + marki[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Full" + @"\" + cmbBrandstoinstall.SelectedValue.ToString() + @"\";
+                        // naprawić sql BD żeby równe numery obsługiwał
+                        if (Directory.Exists(tmp2))
                         {
-                            MessageBox.Show("no assess to file");
+                            installation_done = true;
+                            Process.Start(tmp2 + "Setup.exe");
                         }
                         
                     }
-                    MessageBox.Show($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}/{cmbbuild.SelectedValue.ToString()}/Full/{cmbbrandstoinstall.SelectedValue.ToString()}/Setup.exe");
-                }
+                    catch (Exception)
+                    {
+                        // sciezka szczecin mini
+
+
+                        string tmp2 = @"\\10.128.3.1\DFS_Data_SSC_FS_GenieBuilds\Phoenix\" + marki[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Mini" + @"\";
+
+
+                        try
+                        {
+                            string message = "Are you sure to install Mini version ?";
+                            string caption = "Build Version Choice";
+                            MessageBoxButton buttons = MessageBoxButton.YesNo;
+
+                            if (Directory.Exists(tmp2)) {
+                                MessageBoxResult result_choice = MessageBox.Show(this, message, caption, buttons);
+
+                                if (result_choice.ToString() == "Yes")
+                                {
+                                    installation_done = true;
+                                    Process.Start(tmp2 + "Media.exe");
+                                    
+                                }
+                                else
+                                {
+                                    return; // wyjscie z metody ??
+                                }
+                            }
+                        }
+                        catch {
+                            //sciezka do dunskiego // sprawdzic czy cala ok.
+
+                            try
+                            {
+                                 tmp2 = @"\\demant.com\data\KBN\RnD\SWS\Build\Projects\" + marki_dun[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Full" + @"\" + cmbBrandstoinstall.SelectedValue.ToString() + @"\" + "Setup.exe";
+
+                                if (Directory.Exists(tmp2))
+                                {
+                                    installation_done = true;
+                                    Process.Start(tmp2 + "Setup.exe");
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                tmp2 = @"\\demant.com\data\KBN\RnD\SWS\Build\Projects\" + marki_dun[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Mini" + @"\" +  "Media.exe";
+                                try
+                                {
+                                    string message = "Are you sure to install Mini version ?";
+                                    string caption = "Build Version Choice";
+                                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                                    if (Directory.Exists(tmp2))
+                                    {
+                                        MessageBoxResult result_choice = MessageBox.Show(this, message, caption, buttons);
+                                        if (result_choice.ToString() == "Yes")
+                                        {
+                                            installation_done = true;
+                                            Process.Start(tmp2 + "Media.exe");
+                                            
+                                        }
+                                        else
+                                        {
+                                            return;
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    
+                                }
+
+                            }
+                            
+                        }
+
+                    }
+                    if (!installation_done)
+                    {
+                        MessageBox.Show("No Access to File Or Doesnt Exist ");
+                    }
+                  }
                 else
                 {
                     MessageBox.Show("Brand already installed");
                 }
-               
+                               
             }
-
-            
+                        
         }
 
         private void cmbbrandstoinstall_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string[] marki = { "EXPRESSfit","Genie", "Oasis"  };
-            if (cmbbrandstoinstall.SelectedIndex > -1)
+            if (cmbBrandstoinstall.SelectedIndex > -1)
             {
                 try
                 {
-                    cbindBuild($"D:/test apki/Phoenix/{marki[cmbbrandstoinstall.SelectedIndex]}");
+                    cbindBuild($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbBrandstoinstall.SelectedIndex]}/");
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("No Access to directory");
-                    throw;
+                   
                 }
                
             }  
+        }
+
+        private void cmbbuild_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 
