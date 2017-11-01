@@ -15,37 +15,73 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Media.Animation;
-
+using System.Data.SqlClient;
+using MySql;
+using MySql.Data.MySqlClient;
+using System.ComponentModel;
 namespace ReleaseApp
 {
-
-  
-    public partial class MainWindow : Window
+ 
+    public struct Str_buttons_counter
     {
-        SortedDictionary<string, string> market;
+        public int B_All;
+        public int B_Start_Hattori;
+        public int B_Uninstal_FS;
+        public int B_Update_Market;
+        public int B_Update_Mode;
+        public int B_Delete_Logs;
+
+
+        public Str_buttons_counter(int p1, int p2)
+        {
+            B_All = 0;
+            B_Start_Hattori = 0;
+            B_Uninstal_FS = 0;
+            B_Update_Market = 0;
+            B_Delete_Logs = 0;
+            B_Update_Mode = 0;
+        }
+    }
+
+    public partial class MainWindow : Window 
+    {
+
+        Str_buttons_counter Counters_buttons = new Str_buttons_counter();
+        
+            
+         SortedDictionary<string, string> market;
         SortedDictionary<string, string> mode;
+        SortedDictionary<string, string> brands;
+        SortedDictionary<string, string> builde;
         Dictionary<string, string> BrandtoSoft;
         List<string> marketIndex;
         List<CheckBox> checkBoxList;
-
+        DirectoryInfo[] nameFolders;
         DoubleAnimation blinkAnimation;
-       
+        MySqlConnection SQL_Connection;
+        List<string> Name_actual_FS;
+        int Click_number=0;
+        Stopwatch start_time = Stopwatch.StartNew();
         public int counter2 = 0;
         string[] marki = { "Genie", "Oasis", "EXPRESSfit" };
         public MainWindow()
         {
+           
             InitializeComponent();
             updateLabels();
             verifyInstalledBrands();
             initializeElements();
             bindMarketDictionary();
             bindlogmode();
+            SQL_Connection = ConnectToDB();
+            Name_actual_FS = CheckActualVersionFS(SQL_Connection);
+            cbindBrandsToInstall();
+            getInformation_DB(SQL_Connection);
+
             string path = Directory.GetCurrentDirectory();
-            //MessageBox.Show( path);
             imgSonic.Source = new BitmapImage(new Uri($"{path}/sonic2.png", UriKind.Absolute));
             imgOticon.Source = new BitmapImage(new Uri($"{path}/oticon2.png", UriKind.Absolute));
             imgBernafon.Source = new BitmapImage(new Uri($"{path}/bernafon2.png", UriKind.Absolute));
-            
             btnDelete.IsEnabled = false;
             btnUpdate.IsEnabled = false;
             btnLogMode.IsEnabled = false;
@@ -53,8 +89,179 @@ namespace ReleaseApp
             btnuninstal.IsEnabled = false;
             btnDeletelogs.IsEnabled = false;
             btnFS.IsEnabled = false;
+          
         }
         //________________________________________________________________________________________________________________________________________________
+        private void Window_Closing_1(object sender, CancelEventArgs e) // closing window by X button
+        {
+        
+            MySqlConnection SQL_Connection_fun = ConnectToDB();
+            set_logs_to_DB(SQL_Connection_fun);
+
+        }
+
+        MySqlConnection ConnectToDB()
+        {
+            try
+            {
+                string tmp= "server=zadanko-z-zutu.cba.pl;" +
+                                    "database=zelman;" +
+                                   "uid=zelman;" +
+                                   "password=Santiego94;";
+                MySqlConnection sqlConn = new MySqlConnection(tmp);
+                return sqlConn;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Wystąpił nieoczekiwany błąd!");
+                Console.WriteLine(e.Message);
+                return null;
+            }        
+    }
+
+
+        void getInformation_DB(MySqlConnection SQL_Connection_fun)
+        {
+            List<string> Kolumna = new List<string>();
+            try
+            {
+                if (SQL_Connection_fun != null)
+                {
+                    SQL_Connection_fun.Open();
+
+                    MySqlCommand myCommand = new MySqlCommand("SELECT * FROM information", SQL_Connection_fun);
+                    MySqlDataReader myReader;
+                    myReader = myCommand.ExecuteReader();
+                    myReader.Read();
+                  
+                    Kolumna.Add(myReader.GetString(0)); //update 1 = true
+                    Kolumna.Add(myReader.GetString(1)); // path update string
+                    Kolumna.Add(myReader.GetString(2)); // info 1 = true
+                    Kolumna.Add(myReader.GetString(3)); // information string 
+
+                    SQL_Connection_fun.Close();
+
+                    if (Kolumna[0] == ("1"))
+                    {
+                        MessageBox.Show($"Update available: {Kolumna[1]}");
+                    }
+                    if (Kolumna[2] =="1")
+                    {
+                        lblMessage.Text = Kolumna[3];
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+               
+            }
+                       
+        }
+
+        //INSERT INTO Advance_logs VALUES (All,Start_Hattori,Uninstall_FS,Update_Market,Delete_Logs,Update_Mode,'date','user')
+        void set_logs_to_DB(MySqlConnection SQL_Connection_fun)
+        {
+            try
+            {
+                start_time.Stop();
+                TimeSpan elapsedMs = start_time.Elapsed;
+                int check_ = elapsedMs.Seconds;
+                string tmp_time;
+                if (elapsedMs.Minutes >= 1)
+                {
+                    tmp_time = ($" {elapsedMs.Minutes.ToString()}.{ elapsedMs.Seconds.ToString()}  min");
+                }
+                else
+                {
+                    tmp_time = ($" { elapsedMs.Seconds.ToString()}.{ elapsedMs.Milliseconds.ToString()}  s");
+                }
+                if (elapsedMs.Minutes >= 60)
+                {
+                    
+                    tmp_time = ($" {elapsedMs.Hours.ToString()}.{ elapsedMs.Minutes.ToString()}  h");
+                }
+                
+                if (SQL_Connection_fun != null)
+                {
+                    SQL_Connection_fun.Open();
+                    string date_tmp = DateTime.Now.ToShortDateString();
+                    date_tmp = ($"{DateTime.Now.ToLocalTime()}");
+                    MySqlCommand myCommand = new MySqlCommand($"INSERT INTO Logs VALUES ('{Environment.UserName}','{tmp_time}',{Click_number},'{date_tmp}')", SQL_Connection_fun);
+                    myCommand.ExecuteNonQuery();
+
+                    myCommand = new MySqlCommand($"INSERT INTO Advance_logs VALUES ({Counters_buttons.B_All},{Counters_buttons.B_Start_Hattori},{Counters_buttons.B_Uninstal_FS},{Counters_buttons.B_Update_Market},{Counters_buttons.B_Delete_Logs},{Counters_buttons.B_Update_Mode},'{date_tmp}','{Environment.UserName}')", SQL_Connection_fun);
+                    myCommand.ExecuteNonQuery();
+
+
+
+                    SQL_Connection_fun.Close();
+                }
+            }
+            catch (Exception)
+            {
+
+               
+            }
+
+        }
+
+
+        List<string> CheckActualVersionFS(MySqlConnection SQL_Connection_fun)
+        {
+            //string statement;
+            List<string> statement = new List<string>();
+            List<string> name_ = new List<string>(); //directory for actual version Name_numberBuild
+            if (SQL_Connection_fun != null)
+            {
+               
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM BD_FOR_MultiChanger_DGS WHERE actual = '1';", SQL_Connection_fun);
+        try
+        {
+                    SQL_Connection_fun.Open();
+                    //Example query is: SELECT entity_id FROM catalog_product_flat_1 WHERE sku='itemSku';
+
+
+                    MySqlCommand myCommand = new MySqlCommand("SELECT * FROM BD_FOR_MultiChanger_DGS WHERE actual = '1'", SQL_Connection_fun);
+
+                    MySqlDataReader myReader;
+                    myReader = myCommand.ExecuteReader();
+                    myReader.Read();
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        statement.Add(myReader.GetString(i)); //[2] nazwa katalogu aktualnego [3] 1 = actual build [4] 1 = IP_name_is_equal for all brands // string 2 char [5-7] Genie, oasis, EF IP
+                        i++;
+                    }
+  
+                    myReader.Close();
+                    if (statement[4]=="1")
+                    {
+                        name_.Add($"Genie_{statement[2]}");
+                        name_.Add($"Oasis_{statement[2]}");
+                        name_.Add($"Expressfit_{statement[2]}");
+                        name_.Add($"ExpressFit_{statement[2]}");
+                    }
+                    else
+                    {
+                        name_.Add($"Genie_{statement[5]}");
+                        name_.Add($"Oasis_{statement[6]}");
+                        name_.Add($"Expressfit_{statement[7]}");
+                        name_.Add($"ExpressFit_{statement[7]}");
+                    }
+                    
+                }
+                catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+                    
+        }
+            }
+            SQL_Connection_fun.Close();
+            return name_;
+        }
 
         void bindMarketDictionary()
         {
@@ -170,6 +377,57 @@ namespace ReleaseApp
             cmbLogMode.ItemsSource = mode;
             cmbLogMode.DisplayMemberPath = "Key";
             cmbLogMode.SelectedValuePath = "Value";
+        }
+
+        void cbindBuild(string path)
+        {
+            getNamesInstallationFolders(path);
+
+            builde = new SortedDictionary<string, string>();
+
+            for (int i = 0; i < nameFolders.Length; i++)
+            {
+                builde.Add(nameFolders[i].ToString(), nameFolders[i].ToString());
+            }
+
+            cmbBuild.ItemsSource = builde;
+            cmbBuild.DisplayMemberPath = "Key";
+            cmbBuild.SelectedValuePath = "Value";
+            int licz = 0;
+            SQL_Connection = ConnectToDB();
+            Name_actual_FS = CheckActualVersionFS(SQL_Connection);
+            foreach (var item in builde)
+            {
+                for (int i=0;i < Name_actual_FS.Count;i++) {
+                    if (item.Value.ToString() == Name_actual_FS[i].ToString())
+                    {
+                        cmbBuild.SelectedIndex = licz;
+                    }
+                }
+                licz++;
+            }
+
+            //cmbBuild.SelectedIndex = builde.();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
+
+
+        void cbindBrandsToInstall()
+        {
+            brands = new SortedDictionary<string, string>
+            {
+                { "Genie", "Oticon"},
+                { "Oasis", "Bernafon"},
+                { "EXPRESSfit", "Sonic"}
+            };
+
+            cmbBrandstoinstall.ItemsSource = brands;
+            cmbBrandstoinstall.DisplayMemberPath = "Key";
+            cmbBrandstoinstall.SelectedValuePath = "Value";
         }
 
         void handleSelectedMarket()
@@ -554,6 +812,8 @@ namespace ReleaseApp
             }
             updateLabels();
             verifyInstalledBrands();
+            Click_number++;
+            Counters_buttons.B_Update_Market++;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -592,7 +852,7 @@ namespace ReleaseApp
             }
             updateLabels();
             verifyInstalledBrands();
-            
+            Click_number++;
         }
 
         private void btnFS_Click(object sender, RoutedEventArgs e)
@@ -608,6 +868,10 @@ namespace ReleaseApp
             }
             updateLabels();
             verifyInstalledBrands();
+            Click_number++; ;
+            
+            Counters_buttons.B_Uninstal_FS++;
+          
         }
 
         private void btnHattori_Click(object sender, RoutedEventArgs e)
@@ -630,11 +894,18 @@ namespace ReleaseApp
 
             updateLabels();
             verifyInstalledBrands();
+            Click_number++;
+            Counters_buttons.B_Start_Hattori++;
         }
 
         private void btnuninstal_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Soon ...");
+
+
+
+            Click_number++;
+            Counters_buttons.B_Uninstal_FS++;
         }
 
         private void Brand_Unchecked(object sender, RoutedEventArgs e)
@@ -701,8 +972,11 @@ namespace ReleaseApp
                 }
             }
 
-
+            Click_number++; 
             counter2++;
+           
+            Counters_buttons.B_All++;
+           
         }
 
         private void cmbMarket_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -750,6 +1024,8 @@ namespace ReleaseApp
             }
             updateLabels();
             verifyInstalledBrands();
+            Click_number++;
+            Counters_buttons.B_Update_Mode++;
         }
 
         private void btnDelete_logs(object sender, RoutedEventArgs e)
@@ -793,6 +1069,8 @@ namespace ReleaseApp
 
             updateLabels();
             verifyInstalledBrands();
+            Click_number++;
+            Counters_buttons.B_Delete_Logs++;
         }
 
         private void cmbLogMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -800,10 +1078,146 @@ namespace ReleaseApp
 
         }
 
+        void getNamesInstallationFolders(string DirectoryName)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(DirectoryName);
+            nameFolders = di.EnumerateDirectories().ToArray();
+      
+        }
+
+
         private void btninstal_Click(object sender, RoutedEventArgs e)
+        {
+            string[] marki = { "ExpressFit", "Genie", "Oasis" };
+            string[] marki_dun = { "EXPRESSFit", "Genie", "Oasis" };
+            bool installation_done = false;
+            if (cmbBrandstoinstall.SelectedIndex > -1 && cmbBuild.SelectedIndex > -1)
+            {
+                if (!verifyInstanceOfExec(cmbBrandstoinstall.SelectedValue.ToString()))
+                {
+                    try
+                    {
+                        //sciezka szczecin full
+                        //string  tmp = @"\\10.128.3.1\DFS_Data_SSC_FS_GenieBuilds\Phoenix\{marki[cmbbrandstoinstall.SelectedIndex]}\{cmbbuild.SelectedValue.ToString()}\Full\{cmbbrandstoinstall.SelectedValue.ToString()}\";
+                        string tmp2 = @"\\10.128.3.1\DFS_Data_SSC_FS_GenieBuilds\Phoenix\" + marki[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Full" + @"\" + cmbBrandstoinstall.SelectedValue.ToString() + @"\";
+                        // naprawić sql BD żeby równe numery obsługiwał
+                        if (Directory.Exists(tmp2))
+                        {
+                            installation_done = true;
+                            Process.Start(tmp2 + "Setup.exe");
+                        }
+                        
+                    }
+                    catch (Exception)
+                    {
+                        // sciezka szczecin mini
+                        string tmp2 = @"\\10.128.3.1\DFS_Data_SSC_FS_GenieBuilds\Phoenix\" + marki[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Mini" + @"\";
+                        
+                        try
+                        {
+                            string message = "Are you sure to install Mini version ?";
+                            string caption = "Build Version Choice";
+                            MessageBoxButton buttons = MessageBoxButton.YesNo;
+
+                            if (Directory.Exists(tmp2)) {
+                                MessageBoxResult result_choice = MessageBox.Show(this, message, caption, buttons);
+
+                                if (result_choice.ToString() == "Yes")
+                                {
+                                    installation_done = true;
+                                    Process.Start(tmp2 + "Media.exe");
+                                    
+                                }
+                                else
+                                {
+                                    return; // wyjscie z metody ??
+                                }
+                            }
+                        }
+                        catch {
+                            //sciezka do dunskiego // sprawdzic czy cala ok.
+
+                            try
+                            {
+                                 tmp2 = @"\\demant.com\data\KBN\RnD\SWS\Build\Projects\" + marki_dun[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Full" + @"\" + cmbBrandstoinstall.SelectedValue.ToString() + @"\" + "Setup.exe";
+
+                                if (Directory.Exists(tmp2))
+                                {
+                                    installation_done = true;
+                                    Process.Start(tmp2 + "Setup.exe");
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                tmp2 = @"\\demant.com\data\KBN\RnD\SWS\Build\Projects\" + marki_dun[cmbBrandstoinstall.SelectedIndex] + @"\" + cmbBuild.SelectedValue.ToString() + @"\" + "Mini" + @"\" +  "Media.exe";
+                                try
+                                {
+                                    string message = "Are you sure to install Mini version ?";
+                                    string caption = "Build Version Choice";
+                                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                                    if (Directory.Exists(tmp2))
+                                    {
+                                        MessageBoxResult result_choice = MessageBox.Show(this, message, caption, buttons);
+                                        if (result_choice.ToString() == "Yes")
+                                        {
+                                            installation_done = true;
+                                            Process.Start(tmp2 + "Media.exe");
+
+                                        }
+                                        else
+                                        {
+                                            return;
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    
+                                }
+
+                            }
+                            
+                        }
+
+                    }
+                    if (!installation_done)
+                    {
+                        MessageBox.Show("No Access to File Or Doesnt Exist ");
+                    }
+                  }
+                else
+                {
+                    MessageBox.Show("Brand already installed");
+                }
+                               
+            }
+            Click_number++;
+            
+        }
+
+        private void cmbbrandstoinstall_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string[] marki = { "EXPRESSfit","Genie", "Oasis"  };
+            if (cmbBrandstoinstall.SelectedIndex > -1)
+            {
+                try
+                {
+                    cbindBuild($"//10.128.3.1/DFS_Data_SSC_FS_GenieBuilds/Phoenix/{marki[cmbBrandstoinstall.SelectedIndex]}/");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No Access to directory");
+                   
+                }
+               
+            }  
+        }
+
+        private void cmbbuild_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        
     }
 
 }

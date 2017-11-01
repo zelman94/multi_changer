@@ -110,3 +110,7 @@ C:\apka_multuchanger\ReleaseApp\obj\Debug\ReleaseApp.csproj.CoreCompileInputs.ca
 C:\apka_multuchanger\ReleaseApp\obj\Debug\ReleaseApp.exe
 C:\apka_multuchanger\ReleaseApp\obj\Debug\ReleaseApp.pdb
 C:\apka_multuchanger\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\apka_multuchanger\ReleaseApp\bin\Debug\MySql.Data.dll
+C:\apka_multuchanger\ReleaseApp\bin\Debug\MySql.Data.xml
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Debug\MySql.Data.xml
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Debug\ReleaseApp.csprojResolveAssemblyReference.cache

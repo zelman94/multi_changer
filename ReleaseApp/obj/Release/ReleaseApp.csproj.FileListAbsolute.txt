@@ -1,0 +1,14 @@
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Release\ReleaseApp.exe.config
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Release\ReleaseApp.exe
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\bin\Release\ReleaseApp.pdb
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp.csprojResolveAssemblyReference.cache
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\MainWindow.g.cs
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\App.g.cs
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp_MarkupCompile.cache
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp_MarkupCompile.lref
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\MainWindow.baml
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp.g.resources
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp.Properties.Resources.resources
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp.csproj.GenerateResource.Cache
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp.exe
+C:\Users\Paweł\Documents\multi_changer\ReleaseApp\obj\Release\ReleaseApp.pdb
